@@ -3,46 +3,23 @@
 import os
 import sys
 from mirror import Mirror
+from mirror_cli import MirrorCLI
 
 
 
 def main(argv):
-    help = Mirror.help()
-
-    # cli options
-    action = argv.pop(0)
-    config = 'mirror.json'
-    dry = False
-    while len(argv) > 0:
-        opt = argv.pop(0)
-        if opt == '--dry':
-            dry = True
-        elif opt == '--config':
-            if len(argv) > 0:
-                config = argv.pop(0)
-        else:
-            print help
-            sys.exit(2)
-
     try:
-        mirror = Mirror(config, dry)
-    except IOError, error:
-        print "Unable to open config file =>", error
-        sys.exit(2)
+        cli = MirrorCLI(argv)
+        mirror = Mirror(cli.config, cli.dry_run)
 
-    # push or pull?
-    if action in ('pull', 'push'):
         for t in mirror.targets:
-            debug = getattr(mirror, action)(t)
+            debug = getattr(mirror, cli.action)(t)
             print debug
             # os.system(debug)
-    elif action in ('-h', '--help'):
-        print help
-        sys.exit()
-    else:
-        print help
+    except IOError, error:
+        print 'Unable to open config file =>', error
+    except SyntaxError:
         sys.exit(2)
-
 
 
 

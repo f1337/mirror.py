@@ -6,10 +6,6 @@ class MirrorTest(unittest.TestCase):
         self.subject = Mirror('mirror_test.json')
 
 
-    def test_help(self):
-        self.assertEqual('sync.py {push|pull} [--dry]', Mirror.help())
-
-
     def test_init_with_missing_config_file_raises_exception(self):
         with self.assertRaises(IOError):
             subject = Mirror('no-such-file.json')

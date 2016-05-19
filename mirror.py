@@ -1,16 +1,11 @@
 import json
+import os
 
 
 
 class Mirror(object):
-    @staticmethod
-    def help():
-        return 'sync.py {push|pull} [--dry]'
-
-
-
     def __init__(self, file, dry_run = False):
-        with open(file) as config_json:
+        with open(os.path.expanduser(file)) as config_json:
             config = json.load(config_json)
             self.command = config['command']
             self.flags = config['flags'] + ('n' if dry_run else '')
