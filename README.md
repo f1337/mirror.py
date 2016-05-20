@@ -7,8 +7,8 @@ A simple rsync mirroring tool. JSON configuration. Written in Python.
 usage: mirror.sh [-h] [--version] [-n] [-v] [--config CONFIG] {pull,push}
 
 positional arguments:
-  {pull,push}      'pull' to sync from remote to local;
-                   'push' to sync local to remote
+  {pull,push}      "pull": remote to local or "push": local to remote
+
 
 optional arguments:
   -h, --help       show this help message and exit
@@ -17,6 +17,34 @@ optional arguments:
   -v, --verbose    Print debug output (noisy)
   --config CONFIG  Configuration file (default:
                    ~/.config/mirror.py/mirror.json)
+```
+
+### Examples
+
+Push local changes to remote:
+
+```
+mirror.sh push
+```
+
+Pull local changes from remote:
+
+```
+mirror.sh pull
+```
+
+Preview changes before pushing or pulling:
+
+```
+mirror.sh pull --dry --verbose
+mirror.sh push -nv
+```
+
+List changed files as they are transferred:
+
+```
+mirror.sh pull -v
+mirror.sh push --verbose
 ```
 
 ### Configuration

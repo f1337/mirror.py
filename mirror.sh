@@ -44,7 +44,7 @@ def _parse_arguments ():
 	parser.add_argument(
 		'action',
 		choices=['pull', 'push'],
-		help="'pull' to sync from remote to local; 'push' to sync local to remote"
+		help='"pull": remote to local or "push": local to remote'
 	)
 	# parser.add_argument(
 	# 	'target',
