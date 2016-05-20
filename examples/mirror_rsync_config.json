@@ -1,0 +1,45 @@
+{
+	"command": "/usr/bin/rsync",
+	"flags": "rp",
+	"options": [
+		"--delete",
+		"--exclude='._*'",
+		"--exclude='.AppleDouble'",
+		"--exclude='.DS_Store'"
+	],
+	"local_prefix": "",
+	"remote_prefix": "rsync://user@host/",
+	"targets": {
+		"docs": {
+			"flags": "lt",
+			"options": [],
+			"local": "~/Documents",
+			"remote": "Documents"
+		},
+		"music": {
+			"flags": "I",
+			"options": [],
+			"local": "~/Music",
+			"remote": "Music"
+		},
+		"videos": {
+			"flags": "t",
+			"options": [],
+			"local": "~/Videos",
+			"remote": "Videos"
+		},
+		"workspace": {
+			"flags": "lt",
+			"options": [
+				"--include='.git'",
+				"--exclude='build'",
+				"--exclude='node_modules'",
+				"--exclude='.svn'",
+				"--exclude='.vagrant'",
+				"--exclude='vendor'"
+			],
+			"local": "~/workspace",
+			"remote": "workspace"
+		}
+	}
+}

@@ -19,16 +19,20 @@ def main ():
 		mirror = Mirror(arguments.config)
 	except IOError, error:
 		print 'Unable to open config file =>', error
-		return
+		sys.exit(2)
 
 	mirror.dry_run = arguments.dry_run
 	mirror.verbose = arguments.verbose
 
-	for t in mirror.targets:
-		command = getattr(mirror, arguments.action)(t)
-		if arguments.verbose:
-			print command
-		os.system(command)
+	try:
+		for t in mirror.targets(arguments.target):
+			command = getattr(mirror, arguments.action)(t)
+			if arguments.verbose:
+				print command
+			os.system(command)
+	except KeyError, error:
+		print 'Invalid target: %s. Valid values: %s' % (error, ', '.join(mirror.targets().keys()))
+		sys.exit(2)
 
 
 def _parse_arguments ():
@@ -46,12 +50,11 @@ def _parse_arguments ():
 		choices=['pull', 'push'],
 		help='"pull": remote to local or "push": local to remote'
 	)
-	# parser.add_argument(
-	# 	'target',
-	# 	default=':default',
-	# 	nargs='*',
-	# 	help='Target(s) to sync (default: %(default)s)'
-	# )
+	parser.add_argument(
+		'target',
+		nargs='*',
+		help='Target(s) to sync (default: all configured targets)'
+	)
 	parser.add_argument(
 		'-n',
 		'--dry',

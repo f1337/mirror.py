@@ -13,7 +13,7 @@ class Mirror (object):
 			self.options = config['options']
 			self.local_prefix = config['local_prefix']
 			self.remote_prefix = config['remote_prefix']
-			self.targets = config['targets']
+			self._targets = config['targets']
 			self.verbose = False
 
 
@@ -51,4 +51,8 @@ class Mirror (object):
 		)
 
 	def target (self, key):
-		return self.targets[key]
+		return self._targets[key]
+
+	def targets (self, keys=None):
+		keys = keys or self._targets.keys()
+		return { k: self.target(k) for k in keys }

@@ -40,12 +40,20 @@ with description('Mirror'):
 			with it('returns the target "leg"'):
 				expect(self.subject.target('leg')).not_to(be_none)
 
-		with context('.targets'):
-			with it('returns "leg" and "button" targets *only*'):
+		with context('.targets()'):
+			with it('returns all the configured targets'):
 				expect(
-					set(self.subject.targets.keys())
+					set(self.subject.targets().keys())
 				).to(equal(
-					set(['leg', 'button'])
+					set(['leg', 'button', 'finger'])
+				))
+
+		with context('.targets(["button", "finger"])'):
+			with it('returns the "finger" and "button" targets *only*'):
+				expect(
+					set(self.subject.targets(["button", "finger"]).keys())
+				).to(equal(
+					set(['finger', 'button'])
 				))
 
 

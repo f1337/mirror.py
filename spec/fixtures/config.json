@@ -15,6 +15,12 @@
 			"local": "button",
 			"remote": "button"
 		},
+		"finger": {
+			"flags": "",
+			"options": [],
+			"local": "my/finger",
+			"remote": "my/finger"
+		},
 		"leg": {
 			"flags": "lt",
 			"options": [],
