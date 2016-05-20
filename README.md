@@ -4,11 +4,12 @@ A simple rsync mirroring tool. JSON configuration. Written in Python.
 ## Usage
 
 ```
-usage: mirror.sh [-h] [--version] [-n] [-v] [--config CONFIG] {pull,push}
+usage: mirror.sh [-h] [--version] [-n] [-v] [--config CONFIG]
+                 {pull,push} [target [target ...]]
 
 positional arguments:
   {pull,push}      "pull": remote to local or "push": local to remote
-
+  target           Target(s) to sync (default: all configured targets)
 
 optional arguments:
   -h, --help       show this help message and exit
