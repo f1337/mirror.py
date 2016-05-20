@@ -80,5 +80,29 @@ pip install -r requirements-dev.txt
 ### Testing
 
 ```
-mamba
+mamba --format documentation
+Mirror
+  invalid config file
+    ✓ it raises IOError
+  valid config file
+    .flags()
+      ✓ it returns the configured value
+    .pull("leg")
+      ✓ it returns the remote-to-local command for "leg"
+    .push("button")
+      ✓ it returns the local-to-remote command for "button"
+    .target("leg")
+      ✓ it returns the target "leg"
+    .targets()
+      ✓ it returns all the configured targets
+    .targets(["button", "finger"])
+      ✓ it returns the "finger" and "button" targets *only*
+    .dry_run = True
+      .flags()
+        ✓ it returns the configured value plus "n"
+    .verbose = True
+      .flags()
+        ✓ it returns the configured value plus "v"
+
+9 examples ran in 0.0137 seconds
 ```
