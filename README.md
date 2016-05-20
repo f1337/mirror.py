@@ -4,25 +4,34 @@ A simple rsync mirroring tool. JSON configuration. Written in Python.
 ## Usage
 
 ```
-mirror pull --dry
-mirror pull
-mirror push --dry
-mirror push
+usage: mirror.sh [-h] [--version] [-n] [-v] [--config CONFIG] {pull,push}
+
+positional arguments:
+  {pull,push}      'pull' to sync from remote to local;
+                   'push' to sync local to remote
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --version        show program's version number and exit
+  -n, --dry        Dry run (do not transfer any files)
+  -v, --verbose    Print debug output (noisy)
+  --config CONFIG  Configuration file (default:
+                   ~/.config/mirror.py/mirror.json)
 ```
 
-### Options
+### Configuration
 
-* `--dry` for a dry-run (no files will be transferred)
-* `--config <file>` to specify the config file (default: `~/.config/mirror.py/mirror.json`)
+Two sample configurations are provided in [examples](examples). Copy one to `~/.config/mirror.py/mirror.json` and customize to your liking:
 
-### Configure
+* `mirror_rsync_example.json` demonstrates how to configure the script to run `rsync` using the `rsync` network protocol.
+* `mirror_ssh_example.json` demonstrates how to configure the script to run `rsync` using the `ssh` network protocol.
 
-Copy the sample `mirror.json` to `~/.config/mirror.py/mirror.json` and edit to
-your liking.
 
 ## Contributing
 
-Submit a pull-request, including unit test coverage.
+Contributions are welcome! Please submit a pull-request, including unit test coverage.
+
+### Development Environment
 
 A `Vagrantfile` has been provided for ease of development.
 Vagrant will install `pip` and dev dependencies in an Ubuntu VM:

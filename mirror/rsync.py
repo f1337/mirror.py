@@ -4,22 +4,24 @@ import os
 
 
 class Mirror (object):
-	def __init__ (self, file, dry_run = False):
+	def __init__ (self, file):
 		with open(os.path.expanduser(file)) as config_json:
 			config = json.load(config_json)
 			self.command = config['command']
-			self.flags = config['flags'] + ('n' if dry_run else '')
+			self.dry_run = False
+			self._flags = config['flags']
 			self.options = config['options']
 			self.local_prefix = config['local_prefix']
 			self.remote_prefix = config['remote_prefix']
 			self.targets = config['targets']
+			self.verbose = False
 
 
 
 	def cmd (self, target, paths):
 		return ' '.join([
 			self.command,
-			('-' + self.flags + target['flags']),
+			('-' + self.flags() + target['flags']),
 			' '.join(self.options + target['options']),
 			paths % {
 				'local_prefix': self.local_prefix,
@@ -28,6 +30,13 @@ class Mirror (object):
 				'local': target['local']
 			}
 		])
+
+	def flags (self):
+		return (
+			self._flags +
+			('n' if self.dry_run else '') +
+			('v' if self.verbose else '')
+		)
 
 	def pull (self, target_name):
 		return self.cmd(

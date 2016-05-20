@@ -1,25 +1,25 @@
 {
-  "command": "/usr/bin/rsync",
-  "flags": "rpv",
-  "options": [
-    "--delete"
-  ],
-  "local_prefix": "~/",
-  "remote_prefix": "rsync://bobby@tables.local/",
-  "targets": {
-    "foo": {
-      "flags": "lt",
-      "options": [],
-      "local": "foo",
-      "remote": "foo"
-    },
-    "bar": {
-      "flags": "",
-      "options": [
-        "--exclude='.DS_Store'"
-      ],
-      "local": "bar/baz",
-      "remote": "bar/baz"
-    }
-  }
+	"command": "/usr/bin/rsync",
+	"flags": "rp",
+	"options": [
+		"--delete"
+	],
+	"local_prefix": "~/",
+	"remote_prefix": "rsync://bobby@tables.local/",
+	"targets": {
+		"button": {
+			"flags": "",
+			"options": [
+				"--exclude='.DS_Store'"
+			],
+			"local": "button",
+			"remote": "button"
+		},
+		"leg": {
+			"flags": "lt",
+			"options": [],
+			"local": "my/leg",
+			"remote": "my/leg"
+		}
+	}
 }
